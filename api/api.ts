@@ -76,7 +76,6 @@ const loginUser = async (data: LoginRequestBody): Promise<LoginResponse> => {
       token: "",
     };
   } catch (error: any) {
-    console.log(error);
     // Handle network errors
     if (error.response) {
       // Server responded with a status other than 200 range
@@ -96,8 +95,6 @@ const loginUser = async (data: LoginRequestBody): Promise<LoginResponse> => {
         };
       }
     } else if (error.request) {
-      console.log(error.request);
-
       // Request made but no response received
       return {
         success: false,
@@ -143,7 +140,7 @@ const registerUser = async (
       message: response.data.message,
     };
   } catch (error: any) {
-    console.log(error);
+    console.log("inside api regitser user", error);
     // Handle network errors
     if (error.response) {
       // Server responded with a status other than 200 range
@@ -157,7 +154,9 @@ const registerUser = async (
       } else {
         return {
           success: false,
-          message: `Request failed with status ${status}.`,
+          message: error?.response?.data
+            ? error.response.data?.message
+            : `Request failed with status ${status}.`,
         };
       }
     } else if (error.request) {

@@ -123,7 +123,7 @@ const LoginSheet = () => {
                 fontWeight: "medium",
                 fontSize: "sm",
               }}
-              onPress={() => router.push("/")}
+              onPress={() => router.push("/register")}
             >
               Sign Up
             </Link>
