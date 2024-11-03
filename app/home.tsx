@@ -13,6 +13,7 @@ import { Image, Dimensions } from "react-native";
 import axios from "axios";
 import { Buffer } from "buffer";
 import { ThemedText } from "@/components/ThemedText";
+import ProtectedRoute from "@/components/ProtectedRoute";
 
 interface DimensionsType {
   width: number;
@@ -126,10 +127,12 @@ function Home() {
 
 export default () => {
   return (
-    <NativeBaseProvider>
-      <Center flex={1} px="3">
-        <Home />
-      </Center>
-    </NativeBaseProvider>
+    <ProtectedRoute>
+      <NativeBaseProvider>
+        <Center flex={1} px="3">
+          <Home />
+        </Center>
+      </NativeBaseProvider>
+    </ProtectedRoute>
   );
 };

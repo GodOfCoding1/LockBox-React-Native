@@ -41,7 +41,8 @@ const LoginSheet = () => {
 
       if (response.success) {
         saveToLocal("token", response.token);
-        alert("done!");
+        alert("Logged in successfully!");
+        router.push("/home");
         // Handle successful login, e.g., navigate to the main screen
         console.log("Login successful:", response.message);
       } else {

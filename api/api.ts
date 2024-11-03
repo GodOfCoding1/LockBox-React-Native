@@ -15,6 +15,7 @@ const api = axios.create({
 api.interceptors.request.use(
   (config) => {
     config.headers.Authorization = `${getValueFromLocal("token")}`;
+    console.log("config", config);
     return config;
   },
   (error) => Promise.reject(error)

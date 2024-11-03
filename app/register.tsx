@@ -12,6 +12,7 @@ import {
   Text,
 } from "native-base";
 import { registerUser } from "@/api/api";
+import { useRouter } from "expo-router";
 
 function Register() {
   const [username, setUsername] = useState("");
@@ -19,6 +20,7 @@ function Register() {
   const [password, setPassword] = useState("");
   const [masterPassword, setMasterPassword] = useState("");
   const [error, setError] = useState("");
+  const router = useRouter();
 
   const handleRegister = async () => {
     try {
@@ -35,9 +37,9 @@ function Register() {
       if (!response.success) {
         setError(response.message);
       }
-
       // Handle successful registration
       console.log("User registered:", response.data);
+      router.push("/login");
     } catch (err) {
       // Handle registration error
       setError("Failed to register. Please try again.");
