@@ -23,7 +23,10 @@ api.interceptors.request.use(
 
 const isLoggedin = async () => {
   try {
+    console.log("send auth request");
     await api.get("/user/info");
+    console.log("got full round trip");
+
     return true;
   } catch {
     return false;
@@ -36,6 +39,14 @@ const userInfo = async () => {
     return res.data.user;
   } catch (error) {
     throw Error("some error occured");
+  }
+};
+
+const deleteImage = async (id: string) => {
+  try {
+    await api.delete(`image/${id}`);
+  } catch (error) {
+    throw Error("unable to delete image");
   }
 };
 
@@ -176,4 +187,21 @@ const registerUser = async (
   }
 };
 
-export { isLoggedin, userInfo, loginUser, registerUser };
+const getImageIds = async () => {
+  try {
+    const res = await api.get("/image/id");
+    return res;
+  } catch (error) {
+    console.log("error while fetching image ids: ", error);
+    throw error;
+  }
+};
+
+export {
+  isLoggedin,
+  userInfo,
+  loginUser,
+  registerUser,
+  deleteImage,
+  getImageIds,
+};

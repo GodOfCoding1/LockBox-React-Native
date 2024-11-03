@@ -22,7 +22,7 @@ interface DimensionsType {
 
 const extractDimensions = (imageStr: string): Promise<DimensionsType> => {
   return new Promise((resolve, reject) => {
-    const imageHelper = Image.getSize(
+    Image.getSize(
       imageStr,
       (width, height) => {
         resolve({ width, height });

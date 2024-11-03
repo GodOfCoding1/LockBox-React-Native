@@ -24,6 +24,7 @@ const ProtectedRoute = ({ children }: PropsWithChildren) => {
         return;
       }
     };
+    console.log("auth checker gets called");
 
     checkAuth();
   }, []);

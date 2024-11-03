@@ -24,12 +24,12 @@ export default function HomeScreen() {
       <ThemedView style={styles.stepContainer}>
         <ThemedText type="subtitle">Step 1: Try it</ThemedText>
         <ThemedText>
-          Go to login tab and create a account/login{" "}
-          <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText>{" "}
-          to see changes. Press{" "}
+          Go to login tab and create a account/login
+          <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText>
+          to see changes. Press
           <ThemedText type="defaultSemiBold">
             {Platform.select({ ios: "cmd + d", android: "cmd + m" })}
-          </ThemedText>{" "}
+          </ThemedText>
           to ope
         </ThemedText>
       </ThemedView>
@@ -38,7 +38,7 @@ export default function HomeScreen() {
         <ThemedText>
           Tap the Explore tab to learn more about what's included in this
           starter app.
-          <Link href="/home">
+          <Link href="/decode">
             <ThemedText type="link"> Decode here</ThemedText>
           </Link>
         </ThemedText>
