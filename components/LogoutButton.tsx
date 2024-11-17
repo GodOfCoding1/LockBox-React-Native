@@ -1,7 +1,7 @@
 import { deleteFromLocal } from "@/utlis/secure-store";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import { HStack, IconButton, NativeBaseProvider, Text } from "native-base";
+import { IconButton, NativeBaseProvider, Text } from "native-base";
 import { useColorScheme } from "react-native";
 
 const LogOutButton = () => {

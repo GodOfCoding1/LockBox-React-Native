@@ -1,12 +1,35 @@
-import { Tabs } from "expo-router";
-import React from "react";
+import { Tabs, useRouter } from "expo-router";
+import React, { useEffect, useState } from "react";
 
 import { TabBarIcon } from "@/components/navigation/TabBarIcon";
 import { Colors } from "@/constants/Colors";
 import { useColorScheme } from "@/hooks/useColorScheme";
+import { isLoggedin } from "@/api/api";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const response = await isLoggedin();
+        if (!response) {
+          return;
+        }
+        setIsAuthenticated(true);
+      } catch (error) {
+        console.error("Error checking authentication:", error);
+        alert("Please login again");
+        router.push("/login");
+        return;
+      }
+    };
+    console.log("auth checker gets called");
+
+    checkAuth();
+  }, []);
 
   return (
     <Tabs
@@ -40,9 +63,35 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="upload"
+        options={{
+          title: "Upload",
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon
+              name={focused ? "cloud-upload" : "cloud-upload-outline"}
+              color={color}
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
         name="login"
         options={{
+          href: isAuthenticated ? null : undefined,
           title: "Login",
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon
+              name={focused ? "person" : "person-outline"}
+              color={color}
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="account"
+        options={{
+          href: isAuthenticated ? undefined : null,
+          title: "Account",
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon
               name={focused ? "person" : "person-outline"}
