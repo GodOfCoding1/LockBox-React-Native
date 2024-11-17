@@ -15,11 +15,18 @@ import {
 import { loginUser } from "@/api/api";
 import { saveToLocal } from "@/utlis/secure-store";
 import { useRouter } from "expo-router";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState, AppDispatch } from "@/redux/store";
+import {
+  setAuthToAuthorized,
+  setAuthToUnAuthorized,
+} from "@/redux/slices/authSlice";
 
 const LoginSheet = () => {
   const [username, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const router = useRouter();
+  const dispatch: AppDispatch = useDispatch();
 
   // State for response message
   const [message, setMessage] = useState<string | null>(null);
@@ -42,6 +49,7 @@ const LoginSheet = () => {
       if (response.success) {
         saveToLocal("token", response.token);
         alert("Logged in successfully!");
+        dispatch(setAuthToAuthorized());
         router.push("/decode");
         // Handle successful login, e.g., navigate to the main screen
         console.log("Login successful:", response.message);

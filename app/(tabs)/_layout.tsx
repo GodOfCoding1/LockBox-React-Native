@@ -4,32 +4,14 @@ import React, { useEffect, useState } from "react";
 import { TabBarIcon } from "@/components/navigation/TabBarIcon";
 import { Colors } from "@/constants/Colors";
 import { useColorScheme } from "@/hooks/useColorScheme";
-import { isLoggedin } from "@/api/api";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState, AppDispatch } from "@/redux/store";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-  const router = useRouter();
-
-  useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        const response = await isLoggedin();
-        if (!response) {
-          return;
-        }
-        setIsAuthenticated(true);
-      } catch (error) {
-        console.error("Error checking authentication:", error);
-        alert("Please login again");
-        router.push("/login");
-        return;
-      }
-    };
-    console.log("auth checker gets called");
-
-    checkAuth();
-  }, []);
+  const isAuthenticated = useSelector(
+    (state: RootState) => state.auth.isAuthenticated
+  );
 
   return (
     <Tabs
